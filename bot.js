@@ -79,8 +79,9 @@ async function deleteChat() {
     } else if ((currentMinutes) % 5 === 0) {
         //console.log("DEL");
         for (let chann of guildChannels) {
-            deleteMsg(client.channels.get(chann)).then(v=>{
-                channel.send("```css\n#Chat5Min Channel. Messages will delete every 5 minutes.```");
+            let currentChannel = client.channels.get(chann);
+            deleteMsg(currentChannel).then(v=>{
+                currentChannel.send("```css\n#Chat5Min Channel. Messages will delete every 5 minutes.```");
             });
         }
     }
