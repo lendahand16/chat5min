@@ -74,15 +74,17 @@ async function deleteChat() {
         //console.log("TIK");
         for (let chann of guildChannels) {
             let currentChannel = client.channels.get(chann);
-            currentChannel.send("```Deleting in 1 minute.```");
+            if (currentChannel) currentChannel.send("```Deleting in 1 minute.```");
         }
     } else if ((currentMinutes) % 5 === 0) {
         //console.log("DEL");
         for (let chann of guildChannels) {
             let currentChannel = client.channels.get(chann);
-            deleteMsg(currentChannel).then(v=>{
-                currentChannel.send("```css\n#Chat5Min Channel. Messages will delete every 5 minutes.```");
-            });
+			if (currentChannel) {
+				deleteMsg(currentChannel).then(v=>{
+					currentChannel.send("```css\n#Chat5Min Channel. Messages will delete every 5 minutes.```");
+				});
+			}
         }
     }
 }
