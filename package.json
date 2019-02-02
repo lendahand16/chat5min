@@ -1,0 +1,13 @@
+{
+  "name": "chat5min",
+  "version": "0.0.1",
+  "description": "Simply delete messages every 5 minutes.",
+  "main": "bot.js",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  },
+  "scripts": {
+	"start": "node bot.js"
+  },
+  "author": "Lendahand16"
+}
