@@ -1,6 +1,6 @@
 {
   "name": "chat5min",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simply delete messages every 5 minutes.",
   "main": "bot.js",
   "dependencies": {
