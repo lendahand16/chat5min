@@ -70,13 +70,13 @@ async function deleteMsg(channel=Discord.TextChannel.prototype) {
 async function deleteChat() {
     //console.log("HIII");
     let currentMinutes = new Date().getMinutes();
-    if ((currentMinutes + 1) % 2 === 0) {
+    if ((currentMinutes + 1) % 5 === 0) {
         //console.log("TIK");
         for (let chann of guildChannels) {
             let currentChannel = client.channels.get(chann);
             currentChannel.send("```Deleting in 1 minute.```");
         }
-    } else if ((currentMinutes) % 2 === 0) {
+    } else if ((currentMinutes) % 5 === 0) {
         //console.log("DEL");
         for (let chann of guildChannels) {
             deleteMsg(client.channels.get(chann)).then(v=>{
