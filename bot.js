@@ -50,14 +50,12 @@ function purgeChannels() {
             } else if ((currentMinutes) % 5 === 0) {
                 purgeMessages(currentChannel).then(v=>{
                     currentChannel.send("```css\n#Chat5Min Channel. Messages will delete every 5 minutes.```");
-                    channelAmount++;
                 });
             }
         } else if (currentChannel.permissionsFor(client.user).has(2048)) {
             currentChannel.send("Hey there, I need some help to work properly...\nHere's how to use the Chat5Min bot.\n`[1]` Create a text channel called **`chat5min`**.\n`[2]` Give the following permissions to the Chat5Min bot in that channel:\n`Read Messages`,   `Send Messages`,   `Manage Messages`,   `Read Message History`.");
         }
     }
-    console.log("Purged: "+String(channelAmount));
 }
 
 // Main Program
