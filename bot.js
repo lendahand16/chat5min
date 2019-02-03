@@ -39,6 +39,7 @@ function purgeChannels() {
     let currentMinutes = new Date().getMinutes();
     for (let guild of client.guilds) {
         const currentChannel = guild[1].channels.find(channel => channel.name === "chat5min");
+        if (!currentChannel) return;
         if (currentChannel.permissionsFor(client.user).has(75776)) {
             // Warning Message
             if ((currentMinutes + 1) % 5 === 0)  {
