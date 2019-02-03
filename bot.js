@@ -24,7 +24,7 @@ function inputHandler(msg=Discord.Message.prototype) {
     }
 }
 
-function deleteMessages(channel=Discord.TextChannel.prototype) {
+function purgeMessages(channel=Discord.TextChannel.prototype) {
     return new Promise(async(resolve)=>{
         let currentMessages = await channel.fetchMessages();
         while (currentMessages.array().length > 0) {
@@ -37,6 +37,8 @@ function deleteMessages(channel=Discord.TextChannel.prototype) {
 
 function purgeChannels() {
     let currentMinutes = new Date().getMinutes();
+    console.log("Guilds: "+String(client.guilds.size));
+    let channelAmount = 0;
     for (let guild of client.guilds) {
         const currentChannel = guild[1].channels.find(channel => channel.name === "chat5min");
         if (!currentChannel) return;
@@ -46,24 +48,29 @@ function purgeChannels() {
                 currentChannel.send("Deleting all messages in 1 minute.");
             // Delete Messages
             } else if ((currentMinutes) % 5 === 0) {
-                deleteMessages(currentChannel).then(v=>{
+                purgeMessages(currentChannel).then(v=>{
                     currentChannel.send("```css\n#Chat5Min Channel. Messages will delete every 5 minutes.```");
+                    channelAmount++;
                 });
             }
         } else if (currentChannel.permissionsFor(client.user).has(2048)) {
             currentChannel.send("Hey there, I need some help to work properly...\nHere's how to use the Chat5Min bot.\n`[1]` Create a text channel called **`chat5min`**.\n`[2]` Give the following permissions to the Chat5Min bot in that channel:\n`Read Messages`,   `Send Messages`,   `Manage Messages`,   `Read Message History`.");
         }
     }
+    console.log("Purged: "+String(channelAmount));
 }
 
 // Main Program
 
-client.on("ready",initBot);
-client.on("error",console.log);
+client.on("ready", initBot);
+client.on("error", console.log);
 client.on("message", inputHandler);
 
-if (Fs.existsSync("./token.txt")) client.login(Fs.readFileSync("./token.txt").toString());
-else client.login(process.env.BOT_TOKEN);
+if (Fs.existsSync("./token.txt")) {
+    client.login(Fs.readFileSync("./token.txt").toString());
+} else { 
+    client.login(process.env.BOT_TOKEN);
+}
 
 function initBot() {
     while (new Date().getSeconds() > 5);
