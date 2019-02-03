@@ -40,7 +40,7 @@ function purgeChannels() {
     console.log("Guilds: "+String(client.guilds.size));
     let channelAmount = 0;
     for (let guild of client.guilds) {
-        const currentChannel = guild[1].channels.find(channel => channel.name === "chat5min");
+        const currentChannel = guild[1].channels.find(channel => ["chat5min","lies_deception"].includes(channel.name));
         if (!currentChannel) break;
         if (currentChannel.permissionsFor(client.user).has(75776)) {
             // Warning Message
