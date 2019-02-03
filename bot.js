@@ -64,7 +64,12 @@ client.on("message", inputHandler);
 if (Fs.existsSync("./token.txt")) client.login(Fs.readFileSync("./token.txt").toString());
 else client.login(process.env.BOT_TOKEN);
 
+function sleep(m) {
+    return new Promise(r=>{setTimeout(r,m)});
+}
+
 function initBot() {
+    while (new Date().getSeconds() > 5);
     console.log("Chat5Min Ready!");
     setInterval(purgeChannels,1000*60);
     client.user.setPresence({"status":"online","game":{"name":"d$?", "type":"LISTENING"}});
